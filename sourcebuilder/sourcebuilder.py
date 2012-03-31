@@ -12,7 +12,8 @@ class IndentManager(object):
     to provide the indent context manager. And the indent and dedent methods.
     '''
 
-    def __init__(self):
+    def __init__(self, indent_with=INDENT):
+        self.indent_with = indent_with
         self.level = 0
 
     def __call__(self):
@@ -20,6 +21,13 @@ class IndentManager(object):
         Raise the indentation level if this instance is called like a method.
         '''
         self.indent()
+
+    def __str__(self):
+        '''
+        self.indent_with multiplied by the current indentation level.
+        Used to indent strings to the correct depth.
+        '''
+        return self.indent_with * self.level
 
     def __enter__(self):
         '''
@@ -54,17 +62,67 @@ class IndentManager(object):
 class SourceBuilder(object):
     '''
     A basic source code writer.
+
+    Usage
+    -----
+
+    Create a SourceBuilder instance  and write code to it to line by line.
+    By using the ``indent`` context manager each line gets correctly indented
+    and the input indentation will resemble the output::
+
+      >>> sb = SourceBuilder()
+      >>> sb.writeln()
+      >>> sb.writeln('def hello_world():')
+      >>> with sb.indent:
+      ...     sb.writeln('print \'Hello World\'')
+      ...
+      ...
+      >>> sb.writeln()
+      >>> sb.writeln('hello_world()')
+      >>> source = sb.end()
+      >>> print source
+
+      def hello_world():
+          print 'Hello World'
+
+      hello_world()
+
+    If for some reason context managers can't be used ``indent`` also works
+    as a method. Combined with the ``dedent`` method code indentation levels
+    can be controlled manually.::
+
+      >>> sb = SourceBuilder()
+      >>> sb.writeln()
+      >>> sb.writeln('def hello_world():')
+      >>> sb.indent()
+      >>> sb.writeln('print \'Hello World\'')
+      >>> sb.dedent()
+      >>> sb.writeln()
+      >>> sb.writeln('hello_world()')
+      >>> source = sb.end()
+      >>> print source
+
+      def hello_world():
+           print 'Hello World'
+
+      hello_world()
+
+    It's not advised to combine ``sb.indent`` in ``with`` statements and
+    ``sb.dedent()`` or ``sb.indent()`` at the same time.
     '''
 
-    def __init__(self):
+    def __init__(self, indent_with=INDENT):
+        '''
+        Initialize SourceBuilder, ``indent_with`` is set to 4 spaces by default.
+        '''
         self._out = StringIO()
-        self.indent = IndentManager()
+        self.indent = IndentManager(indent_with=indent_with)
 
     def write(self, code):
         '''
-        Write something at the current indentation level.
+        Write code at the current indentation level.
         '''
-        self._out.write(INDENT * self.indent.level)
+        self._out.write(str(self.indent))
         self._out.write(code)
 
     def writeln(self, code=''):
