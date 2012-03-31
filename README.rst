@@ -1,8 +1,8 @@
 =============
-Sourcebuilder
+SourceBuilder
 =============
 
-Sourcebuilder is a simple way to write (python) code using python code.
+SourceBuilder is a simple way to write (python) code using python code.
 
 Examples
 ========
@@ -11,7 +11,7 @@ Say you want to generate stub class definitions for two clases named ``Foo``
 and ``Bar``. This can be achieved using the following code::
 
   >>> from sourcebuilder import SourceBuilder
-  >>> klasses = ['Foo', 'Bar', 'Baz']
+  >>> klasses = ['Foo', 'Bar']
   >>> sb = SourceBuilder()
   >>> for klass in klasses:
   ...     sb.writeln()
@@ -40,6 +40,7 @@ indentation level. If for some reason your use case doesn't allow for ``with``
 statements you can use the following alternative syntax::
 
   >>> sb = SourceBuilder()
+  >>> klasses = ['Foo', 'Bar']
   >>> for klass in klasses:
   ...     sb.writeln()
   ...     sb.writeln('class {0}(object)'.format(klass))
