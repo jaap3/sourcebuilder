@@ -14,7 +14,7 @@ setup(
     long_description='\n\n'.join((read('README.rst'), read('CHANGES.rst'),)),
     author='Jaap Roes',
     author_email='jaap.roes@gmail.com',
-    url='',
+    url='https://github.com/jaap3/sourcebuilder',
     packages=find_packages(),
     license='MIT',
     classifiers=[
