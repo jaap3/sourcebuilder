@@ -1,0 +1,12 @@
+.coverage
+.installed.cfg
+.tox
+bin
+checkstyle.txt
+develop-eggs
+htmlcov
+parts
+pylint.html
+sourcebuilder.egg-info
+README.html
+unittest2-*
