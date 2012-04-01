@@ -113,7 +113,8 @@ class SourceBuilder(object):
 
     def __init__(self, indent_with=INDENT):
         '''
-        Initialize SourceBuilder, ``indent_with`` is set to 4 spaces by default.
+        Initialize SourceBuilder, ``indent_with`` is set to 4 spaces
+        by default.
         '''
         self._out = StringIO()
         self.indent = IndentManager(indent_with=indent_with)
