@@ -68,6 +68,7 @@ class PySourceBuilder(SourceBuilder):
         (including indentation). This can be changed by passing a different
         ``width`` parameter.
         '''
+        doc = textwrap.dedent(doc).strip()
         max_width = width - len(str(self.indent))
         lines = doc.splitlines()
         if len(lines) == 1 and len(doc) < max_width - len(delimiter) * 2:
@@ -75,6 +76,9 @@ class PySourceBuilder(SourceBuilder):
         else:
             self.writeln(delimiter)
             for line in lines:
+                if not line.strip():
+                    self.writeln()
                 for wrap in textwrap.wrap(line, max_width):
                     self.writeln(wrap)
+            self.writeln()
             self.writeln(delimiter)
