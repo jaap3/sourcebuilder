@@ -107,8 +107,8 @@ class SourceBuilder(object):
 
       hello_world()
 
-    It's not advised to combine ``sb.indent`` in ``with`` statements and
-    ``sb.dedent()`` or ``sb.indent()`` at the same time.
+    It's not advised to use ``sb.indent`` in ``with`` statements in combination
+    with calls to ``sb.dedent()`` or ``sb.indent()``.
     '''
 
     def __init__(self, indent_with=INDENT):
