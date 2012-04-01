@@ -15,7 +15,7 @@ setup(
     author='Jaap Roes',
     author_email='jaap.roes@gmail.com',
     url='https://github.com/jaap3/sourcebuilder',
-    packages=find_packages(),
+    packages=find_packages(exclude=['tests']),
     license='MIT',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
