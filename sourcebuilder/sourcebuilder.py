@@ -7,60 +7,63 @@ INDENT = ' ' * 4
 
 
 class IndentManager(object):
-    '''
+    """
     A context manager for indentation. Used internally by the source manager
     to provide the indent context manager. And the indent and dedent methods.
-    '''
 
+    """
     def __init__(self, indent_with=INDENT):
         self.indent_with = indent_with
         self.level = 0
 
     def __call__(self):
-        '''
+        """
         Raise the indentation level if this instance is called like a method.
-        '''
+
+        """
         self.indent()
 
     def __str__(self):
-        '''
+        """
         self.indent_with multiplied by the current indentation level.
         Used to indent strings to the correct depth.
-        '''
+
+        """
         return self.indent_with * self.level
 
     def __enter__(self):
-        '''
+        """
         Start of an indentation context.
-        '''
+
+        """
         self.indent()
         return self
 
     def __exit__(self, *exc_info):
-        '''
+        """
         Ends of an indentation context, so dedent.
-        '''
+
+        """
         self.dedent()
 
     def indent(self):
-        '''
-        Raise the indentation level by 1.
-        '''
+        """Raise the indentation level by 1."""
         self.level = self.level + 1
         return self
 
     def dedent(self):
-        '''
+        """
         Decrease the indentation level by one. If the indentation level is
         already at zero an exception is raised.
-        '''
+
+        """
         if self.level == 0:
             raise Exception('Indent level is already at zero.')
         self.level = self.level - 1
 
 
 class SourceBuilder(object):
-    '''
+    """
     A basic source code writer.
 
     Usage
@@ -109,49 +112,55 @@ class SourceBuilder(object):
 
     It's not advised to use ``sb.indent`` in ``with`` statements in combination
     with calls to ``sb.dedent()`` or ``sb.indent()``.
-    '''
 
+    """
     def __init__(self, indent_with=INDENT):
-        '''
+        """
         Initialize SourceBuilder, ``indent_with`` is set to 4 spaces
         by default.
-        '''
+
+        """
         self._out = StringIO()
         self.indent = IndentManager(indent_with=indent_with)
 
     def write(self, code):
-        '''
+        """
         Write code at the current indentation level.
-        '''
+
+        """
         self._out.write(str(self.indent))
         self._out.write(code)
 
     def writeln(self, code=''):
-        '''
+        """
         Write a line at the current indentation level.
         If no code is given only a newline is written.
-        '''
+
+        """
         if code:
             self.write(code)
         self._out.write('\n')
 
     def dedent(self):
-        '''
+        """
         Decrease the current indentation level. Should only be used if
         the indent context manager is not used.
-        '''
+
+        """
         self.indent.dedent()
 
     def end(self):
-        '''
+        """
         Get the output and close the internal stream.
-        '''
+
+        """
         value = self._out.getvalue()
         self.close()
         return value
 
     def close(self):
-        '''
+        """
         Close the internal stream.
-        '''
+
+        """
         self._out.close()

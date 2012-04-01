@@ -9,24 +9,25 @@ DOCSTRING_WIDTH = 72
 
 
 class PySourceBuilder(SourceBuilder):
-    '''
+    """
     A special SourceBuilder that provides some convenience context managers
     for writing well formatted Python code.
-    '''
 
+    """
     def __init__(self, indent_with=INDENT):
         super(PySourceBuilder, self).__init__(indent_with=indent_with)
         self._out = SourceBuilder()
 
     def end(self):
-        '''
+        """
         Get the output and close the internal stream.
-        '''
+
+        """
         return self._out.end()
 
     @contextmanager
     def block(self, code, lines_before=0):
-        '''
+        """
         A context manager for block structures. It's a generic way to start a
         control structure (if, try, while, for etc.) or a class, function or
         method definition.
@@ -51,7 +52,7 @@ class PySourceBuilder(SourceBuilder):
                 def __init__(self, what='World'):
                     pass
 
-    '''
+        """
         for i in range(lines_before):
             self.writeln()
         self.writeln(code)
@@ -59,15 +60,16 @@ class PySourceBuilder(SourceBuilder):
             yield
 
     def docstring(self, doc, delimiter=TRIPLE_QUOTES, width=DOCSTRING_WIDTH):
-        '''
+        """
         Write a docstring. The given ``doc`` is surrounded by triple double
-        quotes ("""). This can be changed by passing a different ``delimiter``
-        (e.g. triple single quotes).
+        quotes (\"\"\"). This can be changed by passing a different
+        ``delimiter`` (e.g. triple single quotes).
 
         The docstring is formatted to not run past 72 characters per line
         (including indentation). This can be changed by passing a different
         ``width`` parameter.
-        '''
+
+        """
         doc = textwrap.dedent(doc).strip()
         max_width = width - len(str(self.indent))
         lines = doc.splitlines()
