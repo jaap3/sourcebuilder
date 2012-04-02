@@ -1,5 +1,5 @@
 import unittest
-from sourcebuilder.sourcebuilder import IndentManager
+from sourcebuilder.sourcebuilder import IndentManager, DedentException
 
 
 class TestIndentManager(unittest.TestCase):
@@ -26,7 +26,7 @@ class TestIndentManager(unittest.TestCase):
 
     def test_dedent_raises_exception_if_indentation_level_is_zero(self):
         im = IndentManager()
-        self.assertRaises(Exception, im.dedent)
+        self.assertRaises(DedentException, im.dedent)
 
     def test_indent_with_tab_str(self):
         im = IndentManager(indent_with='\t')

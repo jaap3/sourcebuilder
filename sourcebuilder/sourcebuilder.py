@@ -6,6 +6,9 @@ except ImportError:  # pragma: no cover
 INDENT = ' ' * 4
 
 
+class DedentException(Exception): pass
+
+
 class IndentManager(object):
     """
     A context manager for indentation. Used internally by the source manager
@@ -58,7 +61,7 @@ class IndentManager(object):
 
         """
         if self.level == 0:
-            raise Exception('Indent level is already at zero.')
+            raise DedentException('Indent level is already at zero.')
         self.level = self.level - 1
 
 
