@@ -67,19 +67,6 @@ Shared Methods
 ********************************
 Initialize a SourceBuilder, ``indent_with`` is set to 4 spaces by default.
 
-``close()``
-***********
-Close the internal stream.
-
-``dedent()``
-************
-Decrease the current indentation level. Should only be used if the indent
-context manager is not used.
-
-``end()``
-*********
-Get the output and close the internal stream.
-
 ``write(code)``
 ***************
 Write code at the current indentation level.
@@ -88,6 +75,24 @@ Write code at the current indentation level.
 ********************
 Write a line at the current indentation level.
 If no code is given only a newline is written.
+
+``end()``
+*********
+Get the generated source.
+
+``dedent()``
+************
+Decrease the current indentation level. Should only be used if the indent
+context manager is not used.
+
+``truncate(self)``
+******************
+Discard generated source and memory buffer.
+
+``close()``
+***********
+Convenience method for use with ``contextlib.closing``.
+Calls ``self.truncate()``.
 
 Indentation
 -----------
