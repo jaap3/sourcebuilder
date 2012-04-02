@@ -154,7 +154,23 @@ class SourceBuilder(object):
 
     def end(self):
         """
-        Get the output.
+        Get the generated source.
 
         """
         return self._out.getvalue()
+
+    def truncate(self):
+        '''
+        Discard generated source and memory buffer.
+
+        '''
+        if not self.out.closed:
+            self._out.close()
+        self._out = StringIO()
+
+    def close(self):
+        '''
+        Convenience method for use with ``contextlib.closing``.
+        Calls ``self.truncate()``.
+        '''
+        self.truncate()
