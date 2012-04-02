@@ -90,8 +90,6 @@ class TestPySourceBuilder(unittest.TestCase):
         Odio diam fermentum enim, ut facilisis quam dolor nec metus.''')
         self.assertEquals(MULTILINE_DOCSTRING, sb.end())
 
-
-
     def test_indented_multiline_docstring(self):
         sb = PySourceBuilder()
         sb.indent()
