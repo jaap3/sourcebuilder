@@ -154,16 +154,7 @@ class SourceBuilder(object):
 
     def end(self):
         """
-        Get the output and close the internal stream.
+        Get the output.
 
         """
-        value = self._out.getvalue()
-        self.close()
-        return value
-
-    def close(self):
-        """
-        Close the internal stream.
-
-        """
-        self._out.close()
+        return self._out.getvalue()
