@@ -164,7 +164,7 @@ class SourceBuilder(object):
         Discard generated source and memory buffer.
 
         '''
-        if not self.out.closed:
+        if not self._out.closed:
             self._out.close()
         self._out = StringIO()
 

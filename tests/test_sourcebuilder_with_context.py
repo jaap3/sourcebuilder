@@ -1,4 +1,5 @@
 from __future__ import with_statement
+from contextlib import closing
 import unittest
 from sourcebuilder import SourceBuilder
 
@@ -51,3 +52,13 @@ class TestSourceBuilder(unittest.TestCase):
                 sb.writeln('print(\'Hello {0}\'.format(self.what))')
         sb.writeln()
         self.assertEquals(HELLO_WORLD_CLASS, sb.end())
+
+    def test_closing_truncates(self):
+        CODE = 'print "hello world"'
+        out = []
+        for i in range(3):
+            with closing(SourceBuilder()) as sb:
+                sb.writeln(CODE)
+                out.append(sb.end())
+        print out
+        self.assertEqual([CODE + '\n'] * 3, out)
