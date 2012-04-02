@@ -16,14 +16,7 @@ class PySourceBuilder(SourceBuilder):
     """
     def __init__(self, indent_with=INDENT):
         super(PySourceBuilder, self).__init__(indent_with=indent_with)
-        self._out = SourceBuilder()
 
-    def end(self):
-        """
-        Get the output and close the internal stream.
-
-        """
-        return self._out.end()
 
     @contextmanager
     def block(self, code, lines_before=0):
