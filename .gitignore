@@ -10,3 +10,4 @@ pylint.html
 sourcebuilder.egg-info
 README.html
 unittest2-*
+*.pyc

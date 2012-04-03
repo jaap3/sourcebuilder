@@ -78,7 +78,7 @@ If no code is given only a newline is written.
 
 ``end()``
 *********
-Get the generated source.
+Get the generated source and resets the indent level.
 
 ``dedent()``
 ************
@@ -87,7 +87,7 @@ context manager is not used.
 
 ``truncate(self)``
 ******************
-Discard generated source and memory buffer.
+Discard generated source and memory buffer and resets the indent level.
 
 ``close()``
 ***********

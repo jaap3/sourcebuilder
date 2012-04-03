@@ -64,6 +64,13 @@ class IndentManager(object):
             raise DedentException('Indent level is already at zero.')
         self.level = self.level - 1
 
+    def reset(self):
+        """
+        Reset the indentation level to zero.
+
+        """
+        self.level = 0
+
 
 class SourceBuilder(object):
     """
@@ -154,19 +161,21 @@ class SourceBuilder(object):
 
     def end(self):
         """
-        Get the generated source.
+        Get the generated source and resets the indent level.
 
         """
+        self.indent.reset()
         return self._out.getvalue()
 
     def truncate(self):
         '''
-        Discard generated source and memory buffer.
+        Discard generated source and memory buffer and resets the indent level.
 
         '''
         if not self._out.closed:
             self._out.close()
         self._out = StringIO()
+        self.indent.reset()
 
     def close(self):
         '''

@@ -62,3 +62,14 @@ class TestSourceBuilder(unittest.TestCase):
                 sb.writeln(CODE)
                 out.append(sb.end())
         self.assertEqual([CODE + '\n'] * 3, out)
+
+    def test_end_resets_indent(self):
+        CODE = 'def hello_world():\n    print "hello world"\n'
+        sb = SourceBuilder()
+        for i in range(3):
+            sb.writeln('def hello_world():')
+            sb.indent()
+            sb.writeln('print "hello world"')
+            sb.writeln()
+            sb.end()
+        self.assertEqual('\n'.join([CODE] * 3) + '\n', sb.end())

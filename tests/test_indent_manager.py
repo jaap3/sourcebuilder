@@ -34,3 +34,10 @@ class TestIndentManager(unittest.TestCase):
         self.assertEqual('\t', str(im))
         im.indent()
         self.assertEqual('\t\t', str(im))
+
+    def test_reset(self):
+        im = IndentManager()
+        im.indent()
+        im.reset()
+        self.assertEquals(0, im.level)
+
