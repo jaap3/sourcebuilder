@@ -6,7 +6,11 @@ except ImportError:  # pragma: no cover
 INDENT = ' ' * 4
 
 
-class DedentException(Exception): pass
+class DedentException(Exception):
+    """
+    Raised to signify that decreasing the indent level beyond zero
+    is impossible.
+    """
 
 
 class IndentManager(object):
