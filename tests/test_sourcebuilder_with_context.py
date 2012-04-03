@@ -56,9 +56,9 @@ class TestSourceBuilder(unittest.TestCase):
     def test_closing_truncates(self):
         CODE = 'print "hello world"'
         out = []
+        sb = SourceBuilder()
         for i in range(3):
-            with closing(SourceBuilder()) as sb:
+            with closing(sb):
                 sb.writeln(CODE)
                 out.append(sb.end())
-        print out
         self.assertEqual([CODE + '\n'] * 3, out)
