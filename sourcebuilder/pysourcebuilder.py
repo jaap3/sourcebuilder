@@ -17,7 +17,6 @@ class PySourceBuilder(SourceBuilder):
     def __init__(self, indent_with=INDENT):
         super(PySourceBuilder, self).__init__(indent_with=indent_with)
 
-
     @contextmanager
     def block(self, code, lines_before=0):
         """
