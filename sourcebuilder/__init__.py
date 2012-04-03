@@ -1,2 +1,2 @@
-from .sourcebuilder import SourceBuilder
+from .sourcebuilder import DedentException, SourceBuilder
 from .pysourcebuilder import PySourceBuilder

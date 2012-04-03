@@ -61,7 +61,7 @@ class IndentManager(object):
     def dedent(self):
         """
         Decrease the indentation level by one. If the indentation level is
-        already at zero an exception is raised.
+        already at zero a ``DedentException`` is raised.
 
         """
         if self.level == 0:
@@ -159,6 +159,9 @@ class SourceBuilder(object):
         """
         Decrease the current indentation level. Should only be used if
         the indent context manager is not used.
+
+        Raises a ``DedentException`` if decreasing indentation level is not
+        possible.
 
         """
         self.indent.dedent()

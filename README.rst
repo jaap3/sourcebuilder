@@ -85,6 +85,9 @@ Get the generated source and resets the indent level.
 Decrease the current indentation level. Should only be used if the indent
 context manager is not used.
 
+Raises a ``DedentException`` if decreasing indentation level is not possible.
+
+
 ``truncate(self)``
 ******************
 Discard generated source and memory buffer and resets the indent level.
